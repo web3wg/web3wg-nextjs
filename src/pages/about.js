@@ -5,7 +5,8 @@ import Link from "next/link";
 
 export async function getStaticProps() {
   const res = await fetch(
-    process.env.NEXT_PUBLIC_CMS_URL + "/api/members?populate=*"
+    process.env.NEXT_PUBLIC_CMS_URL +
+      "/api/members?populate=*&sort=displayOrder:asc"
   );
   const { data } = await res.json();
 
@@ -21,13 +22,13 @@ export async function getStaticProps() {
       teamMembers,
       boardMembers,
     },
-    revalidate: 10,
+    revalidate: 300,
   };
 }
 
 export default function About({ teamMembers, boardMembers }) {
   return (
-    <PageLayout title={"About Web3WG"}>
+    <PageLayout title={"About"}>
       <Container>
         <section>
           <div className="container">
@@ -267,7 +268,7 @@ export default function About({ teamMembers, boardMembers }) {
 
 function Member({ profilePicture, socialLink, fullName, description }) {
   return (
-    <div className="col-lg-6 col-md-6 col-sm-12 text-center">
+    <div className="col-lg-6 col-md-6 col-sm-12 text-center member-container">
       <Image
         className="rounded-circle"
         alt="140x140"
@@ -285,9 +286,7 @@ function Member({ profilePicture, socialLink, fullName, description }) {
           <>{fullName}</>
         )}
       </h3>
-      <p>
-        <pre>{description}</pre>
-      </p>
+      <pre>{description}</pre>
     </div>
   );
 }

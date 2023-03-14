@@ -4,7 +4,10 @@ import { useRouter } from "next/router";
 import classNames from "classnames";
 import Container from "./styles";
 
-export default function Header({ darkHeader, stickyHeader }) {
+import logoDark from "../../../public/images/w3wg_lighttext_300.png"
+import logoLight from "../../../public/images/w3wg_blacktext_300.png"
+
+export default function Header({ darkHeader, stickyHeader, transparentHeader }) {
   const { pathname } = useRouter();
 
   return (
@@ -16,6 +19,7 @@ export default function Header({ darkHeader, stickyHeader }) {
             "sticky-header": stickyHeader,
             "bg-transparent": !darkHeader,
             "bg-dark": darkHeader,
+            "custom-transparent": transparentHeader
           }
         )}
       >
@@ -26,7 +30,7 @@ export default function Header({ darkHeader, stickyHeader }) {
                 href={'/about'}
                 className={classNames({
                   'btn_inactive': pathname === '/about',
-                  'btn': pathname !== '/about',
+                  'btn': true,
                 })}
               >
                 About
@@ -41,7 +45,7 @@ export default function Header({ darkHeader, stickyHeader }) {
                 href={'/learn'}
                 className={classNames({
                   'btn_inactive': pathname === '/learn',
-                  'btn': pathname !== '/learn',
+                  'btn': true,
                 })}
               >
                 Learn
@@ -52,7 +56,7 @@ export default function Header({ darkHeader, stickyHeader }) {
         <div className="mx-auto my-0 order-0 order-md-1 position-relative">
           <Link href={'/'} className="mx-auto">
             <Image
-              src="/images/w3wg_blacktext_300.png"
+              src={logoLight}
               className="logo-light"
               width={80}
               height={80}
@@ -60,7 +64,7 @@ export default function Header({ darkHeader, stickyHeader }) {
               priority={true}
             />
             <Image
-              src="/images/w3wg_lighttext_300.png"
+              src={logoDark}
               className="logo-dark"
               width={80}
               height={80}
@@ -84,7 +88,7 @@ export default function Header({ darkHeader, stickyHeader }) {
                 href={'/jobs'}
                 className={classNames({
                   'btn_inactive': pathname === '/jobs',
-                  'btn': pathname !== '/jobs',
+                  'btn': true,
                 })}
               >
                 Jobs
@@ -99,7 +103,7 @@ export default function Header({ darkHeader, stickyHeader }) {
                 href={'/contact'}
                 className={classNames({
                   'btn_inactive': pathname === '/contact',
-                  'btn': pathname !== '/contact',
+                  'btn': true,
                 })}
               >
                 Contact
@@ -111,4 +115,3 @@ export default function Header({ darkHeader, stickyHeader }) {
     </Container>
   )
 }
-

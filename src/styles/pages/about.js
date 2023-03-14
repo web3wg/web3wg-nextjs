@@ -4,9 +4,16 @@ export default styled.div`
   pre {
     font-family: unset !important;
     color: unset !important;
-    font-size: unset !important;
     margin-top: unset !important;
     margin-bottom: unset !important;
+    font-size: 14pt;
+    font-weight: 100;
+    color: #fcf5ed !important;
+    white-space: pre-wrap;
+  }
+
+  .member-container {
+    margin-bottom: 20px;
   }
 
   #mc_embed_signup {

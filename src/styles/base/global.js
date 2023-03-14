@@ -38,6 +38,22 @@ export default createGlobalStyle`
 	--shadow: var(--shadow-dark);
  }
 
+ @font-face {
+  font-family: 'GothamUltraItalic';
+  src: url('/fonts/GothamUltraItalic.otf');
+ }
+
+ @font-face {
+  font-family: 'GothamThin';
+  src: url('/fonts/GothamThin.otf');
+ }
+
+  .error-message {
+    display: inline-block;
+    margin-top: 5px;
+    color: red;
+  }
+
  .bg-light{
 	background-color: var(--bkg1-dark) !important;
  }
@@ -194,7 +210,7 @@ ul.b {
   font-size: 1.0em;
 }
 
-p {
+p, pre {
 	font-size: 14pt;
 	font-weight: 100;
 	color: var(--text);
@@ -216,19 +232,10 @@ label {
 
 hr {
   position: relative;
-  /* top: 20px; */
   border: none;
   height: 4px;
   background: grey;
-  /* margin-bottom: 50px; */
 }
-
-/*
-.jumbotron {
-	background-color: var(--background-light-1);
-}
-*/
-
 
 .nav {
 	font-family: Gotham;
@@ -245,14 +252,12 @@ hr {
   text-decoration: none;
   display: block;
 	font-family: Gotham;
-  /* color: var(--text); */
 }
 
 .button {
 	background-color: var(--accent1);
 	border: none;
 	color: var(--text-light);
-	/* color: var(--text); */
 	padding: 15px 32px;
 	text-align: center;
 	text-decoration: none;
@@ -261,30 +266,24 @@ hr {
 	margin: 4px 2px;
 	cursor: pointer;
 	border-radius: 5px;
+
+  &[disabled] {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
 }
 
 .btn {
-	/* color: pink; */
   background-color: transparent;
   border: none;
   text-decoration: none;
   display: inline-block;
   color: var(--text);
-
-  /* font-size: 1.2em; */
   margin-top: 10px;
   cursor: pointer;
 }
+
 .btn_inactive {
-  background-color: transparent;
-  border: none;
-  text-decoration: none;
-  display: inline-block;
-  color: var(--accent1);
-	/* color: var(--accent3-dark); */
-  /* font-size: 1.2em; */
-  margin-top: 10px;
-  cursor: pointer;
   color:var(--shadow);
 }
 
@@ -294,9 +293,6 @@ button {
 .jobs {
 	color: var(--text-opposite);
 
-}
-.jobs-list {
-	/* background: var(--bkg-opposite); */
 }
 
 .jobs-list-item1{

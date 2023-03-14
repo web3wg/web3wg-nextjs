@@ -21,147 +21,147 @@ export default function Home() {
 
     var loading = new Array();
     loading = [
-      "/images/scrollytelling_v34_loading/000.jpg",
-      "/images/scrollytelling_v34_loading/001.jpg",
-      "/images/scrollytelling_v34_loading/002.jpg",
-      "/images/scrollytelling_v34_loading/003.jpg",
-      "/images/scrollytelling_v34_loading/004.jpg",
-      "/images/scrollytelling_v34_loading/005.jpg",
-      "/images/scrollytelling_v34_loading/006.jpg",
-      "/images/scrollytelling_v34_loading/007.jpg",
-      "/images/scrollytelling_v34_loading/008.jpg",
-      "/images/scrollytelling_v34_loading/009.jpg",
-      "/images/scrollytelling_v34_loading/010.jpg",
-      "/images/scrollytelling_v34_loading/011.jpg",
-      "/images/scrollytelling_v34_loading/012.jpg",
-      "/images/scrollytelling_v34_loading/013.jpg",
+      "/images/scrollytelling_v34_loading/000.webp",
+      "/images/scrollytelling_v34_loading/001.webp",
+      "/images/scrollytelling_v34_loading/002.webp",
+      "/images/scrollytelling_v34_loading/003.webp",
+      "/images/scrollytelling_v34_loading/004.webp",
+      "/images/scrollytelling_v34_loading/005.webp",
+      "/images/scrollytelling_v34_loading/006.webp",
+      "/images/scrollytelling_v34_loading/007.webp",
+      "/images/scrollytelling_v34_loading/008.webp",
+      "/images/scrollytelling_v34_loading/009.webp",
+      "/images/scrollytelling_v34_loading/010.webp",
+      "/images/scrollytelling_v34_loading/011.webp",
+      "/images/scrollytelling_v34_loading/012.webp",
+      "/images/scrollytelling_v34_loading/013.webp",
     ];
 
     var loop1 = new Array();
     loop1 = [
-      // `${bganimdir}/045.jpg`,
-      `${bganimdir}/046.jpg`,
-      `${bganimdir}/047.jpg`,
-      `${bganimdir}/048.jpg`,
-      `${bganimdir}/049.jpg`,
-      `${bganimdir}/050.jpg`,
-      `${bganimdir}/051.jpg`,
-      `${bganimdir}/052.jpg`,
-      `${bganimdir}/053.jpg`,
-      `${bganimdir}/054.jpg`,
-      `${bganimdir}/055.jpg`,
+      // `${bganimdir}/045.webp`,
+      `${bganimdir}/046.webp`,
+      `${bganimdir}/047.webp`,
+      `${bganimdir}/048.webp`,
+      `${bganimdir}/049.webp`,
+      `${bganimdir}/050.webp`,
+      `${bganimdir}/051.webp`,
+      `${bganimdir}/052.webp`,
+      `${bganimdir}/053.webp`,
+      `${bganimdir}/054.webp`,
+      `${bganimdir}/055.webp`,
     ];
 
     var loop2 = new Array();
     loop2 = [
-      // `${bganimdir}/085.jpg`,
-      `${bganimdir}/086.jpg`,
-      `${bganimdir}/087.jpg`,
-      `${bganimdir}/088.jpg`,
-      `${bganimdir}/089.jpg`,
-      `${bganimdir}/090.jpg`,
-      `${bganimdir}/091.jpg`,
-      `${bganimdir}/092.jpg`,
-      `${bganimdir}/093.jpg`,
-      `${bganimdir}/094.jpg`,
-      `${bganimdir}/095.jpg`,
+      // `${bganimdir}/085.webp`,
+      `${bganimdir}/086.webp`,
+      `${bganimdir}/087.webp`,
+      `${bganimdir}/088.webp`,
+      `${bganimdir}/089.webp`,
+      `${bganimdir}/090.webp`,
+      `${bganimdir}/091.webp`,
+      `${bganimdir}/092.webp`,
+      `${bganimdir}/093.webp`,
+      `${bganimdir}/094.webp`,
+      `${bganimdir}/095.webp`,
     ];
 
     var loop3 = new Array();
     loop3 = [
-      // `${bganimdir}/125.jpg`,
-      `${bganimdir}/126.jpg`,
-      `${bganimdir}/127.jpg`,
-      `${bganimdir}/128.jpg`,
-      `${bganimdir}/129.jpg`,
-      `${bganimdir}/130.jpg`,
-      `${bganimdir}/131.jpg`,
-      `${bganimdir}/132.jpg`,
-      `${bganimdir}/133.jpg`,
-      `${bganimdir}/134.jpg`,
-      `${bganimdir}/135.jpg`,
-      `${bganimdir}/136.jpg`,
-      `${bganimdir}/137.jpg`,
-      `${bganimdir}/138.jpg`,
-      `${bganimdir}/139.jpg`,
-      `${bganimdir}/140.jpg`,
-      `${bganimdir}/141.jpg`,
-      `${bganimdir}/142.jpg`,
-      `${bganimdir}/143.jpg`,
-      `${bganimdir}/144.jpg`,
-      `${bganimdir}/145.jpg`,
+      // `${bganimdir}/125.webp`,
+      `${bganimdir}/126.webp`,
+      `${bganimdir}/127.webp`,
+      `${bganimdir}/128.webp`,
+      `${bganimdir}/129.webp`,
+      `${bganimdir}/130.webp`,
+      `${bganimdir}/131.webp`,
+      `${bganimdir}/132.webp`,
+      `${bganimdir}/133.webp`,
+      `${bganimdir}/134.webp`,
+      `${bganimdir}/135.webp`,
+      `${bganimdir}/136.webp`,
+      `${bganimdir}/137.webp`,
+      `${bganimdir}/138.webp`,
+      `${bganimdir}/139.webp`,
+      `${bganimdir}/140.webp`,
+      `${bganimdir}/141.webp`,
+      `${bganimdir}/142.webp`,
+      `${bganimdir}/143.webp`,
+      `${bganimdir}/144.webp`,
+      `${bganimdir}/145.webp`,
     ];
 
     var loop4 = new Array();
     loop4 = [
-      // `${bganimdir}/175.jpg`,
-      `${bganimdir}/176.jpg`,
-      `${bganimdir}/177.jpg`,
-      `${bganimdir}/178.jpg`,
-      `${bganimdir}/179.jpg`,
-      `${bganimdir}/180.jpg`,
-      `${bganimdir}/181.jpg`,
-      `${bganimdir}/182.jpg`,
-      `${bganimdir}/183.jpg`,
-      `${bganimdir}/184.jpg`,
-      `${bganimdir}/185.jpg`,
+      // `${bganimdir}/175.webp`,
+      `${bganimdir}/176.webp`,
+      `${bganimdir}/177.webp`,
+      `${bganimdir}/178.webp`,
+      `${bganimdir}/179.webp`,
+      `${bganimdir}/180.webp`,
+      `${bganimdir}/181.webp`,
+      `${bganimdir}/182.webp`,
+      `${bganimdir}/183.webp`,
+      `${bganimdir}/184.webp`,
+      `${bganimdir}/185.webp`,
     ];
 
     var loop5web2 = new Array();
     loop5web2 = [
-      // `${bganimdir}/215.jpg`,
-      `${bganimdir}/216.jpg`,
-      `${bganimdir}/217.jpg`,
-      `${bganimdir}/218.jpg`,
-      `${bganimdir}/219.jpg`,
-      `${bganimdir}/220.jpg`,
-      `${bganimdir}/221.jpg`,
-      `${bganimdir}/222.jpg`,
-      `${bganimdir}/223.jpg`,
-      `${bganimdir}/224.jpg`,
-      `${bganimdir}/225.jpg`,
+      // `${bganimdir}/215.webp`,
+      `${bganimdir}/216.webp`,
+      `${bganimdir}/217.webp`,
+      `${bganimdir}/218.webp`,
+      `${bganimdir}/219.webp`,
+      `${bganimdir}/220.webp`,
+      `${bganimdir}/221.webp`,
+      `${bganimdir}/222.webp`,
+      `${bganimdir}/223.webp`,
+      `${bganimdir}/224.webp`,
+      `${bganimdir}/225.webp`,
     ];
 
     var loop6btc = new Array();
     loop6btc = [
-      // `${bganimdir}/240.jpg`,
-      `${bganimdir}/241.jpg`,
-      `${bganimdir}/242.jpg`,
-      `${bganimdir}/243.jpg`,
-      `${bganimdir}/244.jpg`,
-      `${bganimdir}/245.jpg`,
-      `${bganimdir}/246.jpg`,
-      `${bganimdir}/247.jpg`,
-      `${bganimdir}/248.jpg`,
-      `${bganimdir}/249.jpg`,
-      `${bganimdir}/250.jpg`,
+      // `${bganimdir}/240.webp`,
+      `${bganimdir}/241.webp`,
+      `${bganimdir}/242.webp`,
+      `${bganimdir}/243.webp`,
+      `${bganimdir}/244.webp`,
+      `${bganimdir}/245.webp`,
+      `${bganimdir}/246.webp`,
+      `${bganimdir}/247.webp`,
+      `${bganimdir}/248.webp`,
+      `${bganimdir}/249.webp`,
+      `${bganimdir}/250.webp`,
     ];
 
     var loop7web3 = new Array();
     loop7web3 = [
-      `${bganimdir}/270.jpg`,
-      `${bganimdir}/271.jpg`,
-      `${bganimdir}/272.jpg`,
-      `${bganimdir}/273.jpg`,
-      `${bganimdir}/274.jpg`,
-      `${bganimdir}/275.jpg`,
-      `${bganimdir}/276.jpg`,
-      `${bganimdir}/277.jpg`,
-      `${bganimdir}/278.jpg`,
-      `${bganimdir}/279.jpg`,
-      `${bganimdir}/280.jpg`,
-      `${bganimdir}/281.jpg`,
-      `${bganimdir}/282.jpg`,
-      `${bganimdir}/283.jpg`,
-      `${bganimdir}/284.jpg`,
-      `${bganimdir}/285.jpg`,
+      `${bganimdir}/270.webp`,
+      `${bganimdir}/271.webp`,
+      `${bganimdir}/272.webp`,
+      `${bganimdir}/273.webp`,
+      `${bganimdir}/274.webp`,
+      `${bganimdir}/275.webp`,
+      `${bganimdir}/276.webp`,
+      `${bganimdir}/277.webp`,
+      `${bganimdir}/278.webp`,
+      `${bganimdir}/279.webp`,
+      `${bganimdir}/280.webp`,
+      `${bganimdir}/281.webp`,
+      `${bganimdir}/282.webp`,
+      `${bganimdir}/283.webp`,
+      `${bganimdir}/284.webp`,
+      `${bganimdir}/285.webp`,
     ];
 
     const frameCount = 285;
     const currentFrame = (index) =>
       `/images/scrollytelling_v34_comp/${index
         .toString()
-        .padStart(3, "0")}.jpg`;
+        .padStart(3, "0")}.webp`;
 
     const preloadImages = () => {
       for (let i = 1; i < frameCount; i++) {
@@ -368,7 +368,7 @@ export default function Home() {
 
     preloadImages();
 
-    return () => window.removeEventListener("click", handleEventListener);
+    return () => window.removeEventListener("scroll", handleEventListener);
   }, []);
 
   return (
@@ -385,71 +385,122 @@ export default function Home() {
 
           <section className="scrollytellingcontainer">
             <div className="scrollytellingcontent">
-              <h1 style={{ marginBottom: "0%" }}>
-                An era-defining technological revolution is underway
-              </h1>
-              <i>Scroll to continue</i>
-            </div>
-          </section>
-
-          <section className="scrollytellingcontainer">
-            <div className="scrollytellingcontent">
-              <h1 style={{ marginBottom: "70%" }}>
-                The printing press introduced mass publishing
-              </h1>
-            </div>
-          </section>
-
-          <section className="scrollytellingcontainer">
-            <div className="scrollytellingcontent">
-              <h1 style={{ marginBottom: "70%" }}>
-                The telegraph and telephone connected people around the world
+              <h1 style={{ marginBottom: "100%" }}>
+                <span className="span-block">An era-defining</span>
+                <br />
+                <span className="custom-gradient">technological</span>
+                <br />
+                <span className="custom-gradient">revolution</span>
+                <br />
+                <span className="span-block">is underway</span>
+                <br />
+                <span className="scroll-text">Scroll to continue</span>
               </h1>
             </div>
           </section>
 
           <section className="scrollytellingcontainer">
             <div className="scrollytellingcontent">
-              <h1 style={{ marginBottom: "70%" }}>
-                Broadcast sent radio and television everywhere
+              <h1 style={{ marginBottom: "100%" }}>
+                <span className="custom-gradient">The printing</span>
+                <br />
+                <span className="custom-gradient">press</span>
+                <br />
+                <span className="span-block">introduced</span>
+                <br />
+                <span className="custom-gradient">mass</span>
+                <span className="custom-gradient">publishing</span>
               </h1>
             </div>
           </section>
 
           <section className="scrollytellingcontainer">
             <div className="scrollytellingcontent">
-              <h1 style={{ marginBottom: "70%" }}>
-                The Web brought publishing, communication and broadcast to
-                everyone
+              <h1 style={{ marginBottom: "100%" }}>
+                <span className="span-block">The telegraph</span>
+                <br />
+                <span className="span-block">and telephone</span>
+                <br />
+                <span className="custom-gradient">connected people</span>
+                <br />
+                <span className="custom-gradient">around the world</span>
+              </h1>
+            </div>
+          </section>
+
+          <section className="scrollytellingcontainer">
+            <div className="scrollytellingcontent">
+              <h1 style={{ marginBottom: "100%" }}>
+                <span className="custom-gradient">Broadcast</span>
+                <br />
+                <span className="custom-gradient">sent radio</span>
+                <span className="span-block">and</span>
+                <br />
+                <span className="custom-gradient">television</span>
+                <br />
+                <span className="span-block">everywhere</span>
+              </h1>
+            </div>
+          </section>
+
+          <section className="scrollytellingcontainer">
+            <div className="scrollytellingcontent">
+              <h1 style={{ marginBottom: "100%" }}>
+                <span className="custom-gradient">The Web</span>
+                <br />
+                <span className="span-block">brought</span>
+                <br />
+                <span className="custom-gradient">publishing,</span>
+                <br />
+                <span className="custom-gradient">communication</span>
+                <br />
+                <span className="span-block">and</span>
+                <span className="custom-gradient">broadcast</span>
+                <br />
+                <span className="span-block">to everyone</span>
               </h1>
             </div>
           </section>
           <section className="scrollytellingcontainer">
             <div className="scrollytellingcontent">
-              <p style={{ marginBottom: "0%", marginTop: "0%" }}>
-                But it's become centralized
-              </p>
-              <h1 style={{ marginBottom: "70%" }}>
-                Closed platforms are controlled by a few companies
+              <h1 style={{ marginBottom: "100%" }}>
+                <span className="span-block">But it's become</span>
+                <br />
+                <span className="custom-gradient">centralized</span>
+                <br />
+                <span className="span-block">Closed platforms are</span>
+                <br />
+                <span className="span-block">controlled by a few</span>
+                <br />
+                <span className="custom-gradient">companies</span>
               </h1>
             </div>
           </section>
           <section className="scrollytellingcontainer">
             <div className="scrollytellingcontent">
-              <p style={{ marginBottom: "0%", marginTop: "0%" }}>
-                Web3 is decentralized
-              </p>
-              <h1 style={{ marginBottom: "70%" }}>
-                Open protocols are controlled by users
+              <h1 style={{ marginBottom: "100%" }}>
+                <span className="custom-gradient">Web3 is</span>
+                <br />
+                <span className="custom-gradient">decentralized</span>
+                <br />
+                <span className="span-block">Open protocols are</span>
+                <br />
+                <span className="span-block">controlled by</span>
+                <br />
+                <span className="custom-gradient">users</span>
               </h1>
             </div>
           </section>
           <section className="scrollytellingcontainerLast">
             <div className="scrollytellingcontent">
-              <p style={{ marginBottom: "0%" }}>A new web for a new era</p>
               <h1 style={{ marginBottom: "20%" }}>
-                Web3 is transforming the infrastructure of the web
+                <span className="custom-gradient">A new web</span>
                 <br />
+                <span className="custom-gradient">for a new era</span>
+                <br />
+                <span className="span-block">Web3 is transforming the</span>
+                <br />
+                <span className="span-block">infrastructure of the web</span>
                 <br />
                 <Link href={"/about"}>
                   <input
