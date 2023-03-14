@@ -5,38 +5,46 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 
 export async function getStaticPaths() {
-  const res = await fetch(
-    process.env.NEXT_PUBLIC_CMS_URL + "/api/jobs?fields[0]=slug"
-  );
-  const { data: jobsSlugs } = await res.json();
+  try {
+    const res = await fetch(
+      process.env.NEXT_PUBLIC_CMS_URL + "/api/jobs?fields[0]=slug"
+    );
+    const { data: jobsSlugs } = await res.json();
 
-  const paths = jobsSlugs.map((jobSlug) => {
+    const paths = jobsSlugs.map((jobSlug) => {
+      return {
+        params: {
+          slug: jobSlug.attributes.slug,
+        },
+      };
+    });
+
     return {
-      params: {
-        slug: jobSlug.attributes.slug,
-      },
+      paths,
+      fallback: true,
     };
-  });
-
-  return {
-    paths,
-    fallback: true,
-  };
+  } catch (error) {
+    return { paths: [], fallback: false };
+  }
 }
 
 export async function getStaticProps({ params }) {
-  const res = await fetch(
-    process.env.NEXT_PUBLIC_CMS_URL +
-      `/api/jobs?filters[slug][$eq]=${params.slug}`
-  );
-  const { data: jobs } = await res.json();
+  try {
+    const res = await fetch(
+      process.env.NEXT_PUBLIC_CMS_URL +
+        `/api/jobs?filters[slug][$eq]=${params.slug}`
+    );
+    const { data: jobs } = await res.json();
 
-  return {
-    props: {
-      job: jobs[0],
-    },
-    revalidate: 300,
-  };
+    return {
+      props: {
+        job: jobs[0],
+      },
+      revalidate: 300,
+    };
+  } catch (error) {
+    return { notFound: true };
+  }
 }
 
 export default function Learn({ job }) {

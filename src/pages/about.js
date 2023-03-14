@@ -56,7 +56,7 @@ export default function About({ teamMembers = [], boardMembers = [] }) {
                   <p className="text-center">
                     Web3 Working Group is a 501(c)(3) nonprofit organization.
                     Our purpose is to educate about web3 infrastructure and how
-                    it's distinct but adjacent to the cryptocurrency industry.
+                    it&apos;s distinct but adjacent to the cryptocurrency industry.
                     We educate regulators and the public at-large about how web3
                     will permanently restore user control of cyberspace,
                     replacing centralized control with transparent and
@@ -187,7 +187,7 @@ export default function About({ teamMembers = [], boardMembers = [] }) {
                                 href="https://mailchimp.com/legal/terms"
                                 target="_blank"
                               >
-                                Learn more about Mailchimp's privacy practices
+                                Learn more about Mailchimp&apos;s privacy practices
                                 here.
                               </a>
                             </p>

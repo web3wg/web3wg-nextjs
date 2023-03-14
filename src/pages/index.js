@@ -464,7 +464,7 @@ export default function Home() {
           <section className="scrollytellingcontainer">
             <div className="scrollytellingcontent">
               <h1 style={{ marginBottom: "100%" }}>
-                <span className="span-block">But it's become</span>
+                <span className="span-block">But it&apos;s become</span>
                 <br />
                 <span className="custom-gradient">centralized</span>
                 <br />
