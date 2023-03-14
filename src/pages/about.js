@@ -4,29 +4,38 @@ import Image from "next/image";
 import Link from "next/link";
 
 export async function getStaticProps() {
-  const res = await fetch(
-    process.env.NEXT_PUBLIC_CMS_URL +
-      "/api/members?populate=*&sort=displayOrder:asc"
-  );
-  const { data } = await res.json();
+  const REVALIDATE_TIME = 300;
 
-  const teamMembers = data.filter(
-    (member) => member.attributes.memberType === "TEAM"
-  );
-  const boardMembers = data.filter(
-    (member) => member.attributes.memberType === "BOARD"
-  );
+  try {
+    const res = await fetch(
+      process.env.NEXT_PUBLIC_CMS_URL +
+        "/api/members?populate=*&sort=displayOrder:asc"
+    );
+    const { data } = await res.json();
 
-  return {
-    props: {
-      teamMembers,
-      boardMembers,
-    },
-    revalidate: 300,
-  };
+    const teamMembers = data.filter(
+      (member) => member.attributes.memberType === "TEAM"
+    );
+    const boardMembers = data.filter(
+      (member) => member.attributes.memberType === "BOARD"
+    );
+
+    return {
+      props: {
+        teamMembers,
+        boardMembers,
+      },
+      revalidate: REVALIDATE_TIME,
+    };
+  } catch (error) {
+    return {
+      props: {},
+      revalidate: REVALIDATE_TIME,
+    };
+  }
 }
 
-export default function About({ teamMembers, boardMembers }) {
+export default function About({ teamMembers = [], boardMembers = [] }) {
   return (
     <PageLayout title={"About"}>
       <Container>

@@ -2,27 +2,36 @@ import PageLayout from "@components/PageLayout";
 import Container, { MediumArticleContainer } from "@styles/pages/learn";
 
 export async function getStaticProps() {
-  const resYoutubeVideos = await fetch(
-    process.env.NEXT_PUBLIC_CMS_URL +
-      "/api/youtube-videos?sort=displayOrder:asc"
-  );
-  const resMediumArticles = await fetch(
-    "https://api.rss2json.com/v1/api.json?rss_url=https://medium.com/feed/@web3wg"
-  );
+  const REVALIDATE_TIME = 300;
 
-  const { data: youtubeVideos } = await resYoutubeVideos.json();
-  const { items: mediumArticles } = await resMediumArticles.json();
+  try {
+    const resYoutubeVideos = await fetch(
+      process.env.NEXT_PUBLIC_CMS_URL +
+        "/api/youtube-videos?sort=displayOrder:asc"
+    );
+    const resMediumArticles = await fetch(
+      "https://api.rss2json.com/v1/api.json?rss_url=https://medium.com/feed/@web3wg"
+    );
 
-  return {
-    props: {
-      youtubeVideos,
-      mediumArticles,
-    },
-    revalidate: 300,
-  };
+    const { data: youtubeVideos } = await resYoutubeVideos.json();
+    const { items: mediumArticles } = await resMediumArticles.json();
+
+    return {
+      props: {
+        youtubeVideos,
+        mediumArticles,
+      },
+      revalidate: REVALIDATE_TIME,
+    };
+  } catch (error) {
+    return {
+      props: {},
+      revalidate: REVALIDATE_TIME,
+    };
+  }
 }
 
-export default function Learn({ youtubeVideos, mediumArticles }) {
+export default function Learn({ youtubeVideos = [], mediumArticles = [] }) {
   return (
     <PageLayout title={"Learn"}>
       <Container>

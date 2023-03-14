@@ -3,20 +3,30 @@ import Container from "@styles/pages/jobs";
 import Link from "next/link";
 
 export async function getStaticProps() {
-  const res = await fetch(
-    process.env.NEXT_PUBLIC_CMS_URL + "/api/jobs?fields[0]=slug&fields[1]=title"
-  );
-  const { data: jobs } = await res.json();
+  const REVALIDATE_TIME = 300;
 
-  return {
-    props: {
-      jobs,
-    },
-    revalidate: 300,
-  };
+  try {
+    const res = await fetch(
+      process.env.NEXT_PUBLIC_CMS_URL +
+        "/api/jobs?fields[0]=slug&fields[1]=title"
+    );
+    const { data: jobs } = await res.json();
+
+    return {
+      props: {
+        jobs,
+      },
+      revalidate: REVALIDATE_TIME,
+    };
+  } catch (error) {
+    return {
+      props: {},
+      revalidate: REVALIDATE_TIME,
+    };
+  }
 }
 
-export default function Jobs({ jobs }) {
+export default function Jobs({ jobs = [] }) {
   return (
     <PageLayout title={"Jobs"}>
       <Container>
