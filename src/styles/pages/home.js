@@ -143,12 +143,12 @@ export default createGlobalStyle`
     font-size: 1rem;
     font-weight: 100;
     width: fit-content;
-    margin-top: 20px;
     border-radius: 20px;
     border: 1px #e10d8c solid;
     padding: 5px 15px;
     padding-right: 35px;
     opacity: 0.8;
+    margin: 20px 12px;
 
     &::after {
       content: "";
