@@ -48,6 +48,11 @@ export default createGlobalStyle`
   src: url('/fonts/GothamThin.otf');
  }
 
+ @font-face {
+  font-family: 'Montserrat';
+  src: url('/fonts/Montserrat-VariableFont_wght.ttf');
+ }
+
   .error-message {
     display: inline-block;
     margin-top: 5px;
@@ -305,16 +310,15 @@ button {
 
 .svg {
   filter: invert(87%) sepia(0%) saturate(33%) hue-rotate(144deg) brightness(84%) contrast(89%);
-  width: 30px;
-  height: 30px;
+  transition: 0.4s;
 }
 .svg:hover {
   filter: invert(87%) sepia(100%) saturate(7494%) hue-rotate(333deg) brightness(105%) contrast(104%);
-  transform: translateY(-5px);
-  -webkit-transform: translateY(-5px);
-  -moz-transform: translateY(-5px);
-  -ms-transform: translateY(-5px);
-  -o-transform: translateY(-5px);
+  transform: translateY(-3px);
+  -webkit-transform: translateY(-3px);
+  -moz-transform: translateY(-3px);
+  -ms-transform: translateY(-3px);
+  -o-transform: translateY(-3px);
 }
 
 @media (max-width: 767.98px){
