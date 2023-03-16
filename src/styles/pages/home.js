@@ -58,9 +58,8 @@ export default createGlobalStyle`
 
   body {
     background: var(--bkg1);
-    /* height: 1125vh; */
     color: var(--text);
-    padding: 3em;
+    padding: 0px;
   }
 
   body::after {
@@ -71,6 +70,7 @@ export default createGlobalStyle`
   section {
     z-index: 1;
     position: relative;
+    padding: 3em;
   }
   .scrollytellingcontainer {
     width: 50%;
@@ -342,9 +342,46 @@ export default createGlobalStyle`
     }
   }
 
+  @media (min-width: 1024px) and (max-width: 1499px) {
+    section:nth-of-type(1) {
+      /* era defining */
+      width: 54%;
+    }
+
+    section:nth-of-type(2) {
+      /* printing press */
+      width: 42%;
+    }
+
+    section:nth-of-type(3) {
+      /* telephone telegraph */
+      width: 47%;
+    }
+
+    section:nth-of-type(4) {
+      /* broadcast */
+      width: 46%;
+    }
+
+    section:nth-of-type(5) {
+      /* internet */
+      width: 46%;
+    }
+
+    section:nth-of-type(6) {
+      /* centralized web2 */
+      width: 47%;
+    }
+
+    section:nth-of-type(7) {
+      /* decentralized web3 */
+      width: 54%;
+    }
+  }
+
   @media (max-width: 1023.98px) and (orientation: landscape) {
     body {
-      padding: 0.5em;
+      padding: 0px;
       padding-top: 62px;
     }
 
@@ -389,6 +426,8 @@ export default createGlobalStyle`
     }
 
     section {
+      padding: 0.5em;
+
       .span-block {
         font-size: 1.0rem !important;
       }
@@ -417,10 +456,12 @@ export default createGlobalStyle`
 
   @media (max-width: 575.98px) {
     body {
-      padding: 1.5em;
+      padding: 0px;
     }
 
     section {
+      padding: 1.5em;
+
       .span-block {
         font-size: 1.2rem !important;
       }
@@ -437,10 +478,12 @@ export default createGlobalStyle`
 
   @media (min-height: 799.98px) and (orientation: portrait) {
     body {
-      padding: 1.5em;
+      padding: 0px;
     }
 
     section {
+      padding: 1.5em;
+
       h1 {
         line-height: 1.4rem;
 
