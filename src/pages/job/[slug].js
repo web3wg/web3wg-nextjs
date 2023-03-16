@@ -1,8 +1,9 @@
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { useRouter } from "next/router";
 import Markdown from "markdown-to-jsx";
 import PageLayout from "@components/PageLayout";
 import Container from "@styles/pages/jobs";
-import { useState } from "react";
-import { useForm } from "react-hook-form";
 
 export async function getStaticPaths() {
   try {
@@ -47,7 +48,9 @@ export async function getStaticProps({ params }) {
   }
 }
 
-export default function Learn({ job }) {
+export default function Learn({ job = { attributes: {} } }) {
+  const router = useRouter();
+
   const {
     title,
     aboutYou,
@@ -102,6 +105,10 @@ export default function Learn({ job }) {
     } finally {
       setIsLoading(false);
     }
+  }
+
+  if (router.isFallback) {
+    return <div />;
   }
 
   return (
