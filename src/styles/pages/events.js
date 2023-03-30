@@ -3,19 +3,19 @@ import styled from "styled-components";
 export default styled.div`
   margin-bottom: 140px;
 
-  .no-jobs {
+  .no-events {
     text-align: center;
     font-size: 1.4rem;
   }
 
-  .jobs-list {
+  .events-list {
     display: flex;
     flex-direction: column;
     gap: 28px;
   }
 `;
 
-export const JobContainer = styled.div`
+export const EventContainer = styled.div`
   display: flex;
   align-items: center;
   gap: 28px;
@@ -29,11 +29,11 @@ export const JobContainer = styled.div`
     box-shadow: -12px 16px 38px rgba(252, 238, 33, 0.2);
   }
 
-  .job-details {
+  .event-details {
     flex: 1;
     color: #fff;
 
-    .job-publish-date {
+    .event-date {
       font-size: 0.6rem;
       font-weight: 500;
       margin-bottom: 8px;
@@ -41,12 +41,13 @@ export const JobContainer = styled.div`
       text-transform: uppercase;
     }
 
-    .job-title {
+    .event-title {
       font-size: 1rem;
       margin-bottom: 8px;
+      text-transform: uppercase;
     }
 
-    .job-description {
+    .event-description {
       font-weight: 400;
       display: -webkit-box;
       -webkit-line-clamp: 2;
@@ -59,7 +60,7 @@ export const JobContainer = styled.div`
     }
   }
 
-  .job-apply {
+  .event-button {
     background: #e1058c;
     box-shadow: -12px 16px 38px rgba(237, 7, 143, 0.3);
     border-radius: 22px;

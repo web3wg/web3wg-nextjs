@@ -23,38 +23,8 @@ export default function Header({ darkHeader, stickyHeader, transparentHeader }) 
           }
         )}
       >
-        <div className="navbar-collapse collapse w-100 dual-collapse2 order-1 order-md-1">
-          <ul className="navbar-nav ml-auto text-center">
-            <li className="nav-item active">
-              <Link
-                href={'/about'}
-                className={classNames({
-                  'btn_inactive': pathname === '/about',
-                  'btn': true,
-                })}
-              >
-                About
-              </Link>
-            </li>
-          </ul>
-        </div>
-        <div className="navbar-collapse collapse w-40 dual-collapse2 order-1 order-md-1">
-          <ul className="navbar-nav ml-auto text-center">
-            <li className="nav-item active">
-              <Link
-                href={'/learn'}
-                className={classNames({
-                  'btn_inactive': pathname === '/learn',
-                  'btn': true,
-                })}
-              >
-                Learn
-              </Link>
-            </li>
-          </ul>
-        </div>
-        <div className="mx-auto my-0 order-0 order-md-1 position-relative">
-          <Link href={'/'} className="mx-auto">
+        <div className="mx-auto my-0 order-0 order-md-1 position-relative w-100 main-logo">
+          <Link href={'/'}>
             <Image
               src={logoLight}
               className="logo-light"
@@ -81,17 +51,62 @@ export default function Header({ darkHeader, stickyHeader, transparentHeader }) 
             <span className="navbar-toggler-icon"></span>
           </button>
         </div>
+        <div className="navbar-collapse collapse dual-collapse2 order-1 order-md-1">
+          <ul className="navbar-nav ml-auto text-center">
+            <li className="nav-item active">
+              <Link
+                href={'/about'}
+                className={classNames({
+                  'current-page': pathname === '/about',
+                  'btn': true,
+                })}
+              >
+                About
+              </Link>
+            </li>
+          </ul>
+        </div>
+        <div className="navbar-collapse collapse w-40 dual-collapse2 order-1 order-md-1">
+          <ul className="navbar-nav ml-auto text-center">
+            <li className="nav-item active">
+              <Link
+                href={'/learn'}
+                className={classNames({
+                  'current-page': pathname === '/learn',
+                  'btn': true,
+                })}
+              >
+                Learn
+              </Link>
+            </li>
+          </ul>
+        </div>
         <div className="navbar-collapse collapse w-40 dual-collapse2 order-1 order-md-1">
           <ul className="navbar-nav ml-auto text-center">
             <li className="nav-item active">
               <Link
                 href={'/jobs'}
                 className={classNames({
-                  'btn_inactive': pathname === '/jobs',
+                  'current-page': pathname === '/jobs',
                   'btn': true,
                 })}
               >
                 Jobs
+              </Link>
+            </li>
+          </ul>
+        </div>
+        <div className="navbar-collapse collapse dual-collapse2 order-2 order-md-2">
+          <ul className="navbar-nav mr-auto text-center">
+            <li className="nav-item active">
+              <Link
+                href={'/events'}
+                className={classNames({
+                  'current-page': pathname === '/events',
+                  'btn': true,
+                })}
+              >
+                Events
               </Link>
             </li>
           </ul>
@@ -102,7 +117,7 @@ export default function Header({ darkHeader, stickyHeader, transparentHeader }) 
               <Link
                 href={'/contact'}
                 className={classNames({
-                  'btn_inactive': pathname === '/contact',
+                  'current-page': pathname === '/contact',
                   'btn': true,
                 })}
               >

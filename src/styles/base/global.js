@@ -2,7 +2,7 @@ import { createGlobalStyle } from "styled-components";
 
 export default createGlobalStyle`
   :root {
-	font-family: 'Gotham', sans-serif;
+  font-family: "Montserrat", sans-serif;
 
 	--text-dark: #FCF5ED;
 	--accent1-dark: #FCEE21;
@@ -152,21 +152,8 @@ html {
 body {
 	height: 100%;
 	background-color: var(--bkg1);
+  overflow-x: hidden;
 }
-
-body::after{
-	content: "";
-	background: url("/images/grid_top.png") no-repeat center top, url("/images/grid_bottom.png") no-repeat center bottom;
-	background-size: 100% 25%, 100%;
-	opacity: .25;
-	top:0;
-	left:0;
-	bottom: 0;
-	right: 0;
-	position: absolute;
-	z-index: -1;
-}
-
 
 h1 {
 	font-size: 30pt;
@@ -259,6 +246,10 @@ hr {
 	font-family: Gotham;
 }
 
+.scroll-block {
+  overflow-y: hidden;
+}
+
 .button {
 	background-color: var(--accent1);
 	border: none;
@@ -286,10 +277,6 @@ hr {
   color: var(--text);
   margin-top: 10px;
   cursor: pointer;
-}
-
-.btn_inactive {
-  color:var(--shadow);
 }
 
 button {
@@ -353,7 +340,7 @@ button {
 	p {
 		font-size: 12pt;
 		font-weight: 100;
-		line-height: 10pt;
+		line-height: normal;
 	}
 }
 `;

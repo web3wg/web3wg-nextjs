@@ -1,6 +1,23 @@
 import styled from "styled-components";
 
 export default styled.div`
+  .embed-responsive {
+    border-radius: 12px;
+    padding: 20px;
+    max-width: 720px;
+    margin: auto;
+
+    .embed-responsive-item {
+      padding: 16px;
+      border: 1px solid #fff;
+      border-radius: 12px;
+
+      & video {
+        border-radius: 12px;
+      }
+    }
+  }
+
   pre {
     font-family: unset !important;
     color: unset !important;
@@ -10,10 +27,6 @@ export default styled.div`
     font-weight: 100;
     color: #fcf5ed !important;
     white-space: pre-wrap;
-  }
-
-  .member-container {
-    margin-bottom: 20px;
   }
 
   #mc_embed_signup {
@@ -278,7 +291,20 @@ export default styled.div`
     clear: both;
     width: auto;
     display: block;
-    margin: 1em 0 1em 5%;
+    background: #e1058c;
+    border: none;
+    box-shadow: -12px 16px 38px rgba(237, 7, 143, 0.3);
+    border-radius: 22px;
+    padding: 12px 28px;
+    cursor: pointer;
+    transition: 0.4s;
+    color: #fff;
+    margin: auto;
+
+    &:hover {
+      transform: scale(0.95);
+      box-shadow: -12px 0px 38px rgba(237, 7, 143, 0.3);
+    }
   }
   #mc_embed_signup #num-subscribers {
     font-size: 1.1em;
@@ -305,5 +331,68 @@ export default styled.div`
   }
   #mc_embed_signup #mc-embedded-subscribe-form input.mce_inline_error {
     border: 2px solid #e85c41;
+  }
+`;
+
+export const MemberContainer = styled.div`
+  padding: 24px;
+
+  .member-inner-container {
+    display: flex;
+    padding: 12px;
+    gap: 18px;
+    background-color: #060b2f;
+    box-shadow: 0px 12px 28px rgba(0, 0, 0, 0.41);
+    border-radius: 12px;
+    margin-bottom: 20px;
+    z-index: 1;
+
+    &.alternate-color {
+      .inner-container {
+        img {
+          border-color: #fcee21 !important;
+        }
+      }
+    }
+
+    .inner-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      text-align: left;
+
+      .image-container {
+        position: relative;
+
+        img {
+          border-radius: 12px;
+          border-left: 4px solid #e1058c;
+        }
+      }
+
+      h3 {
+        font-size: 1.4rem;
+        font-weight: 700;
+        margin-bottom: 0px;
+      }
+
+      h4 {
+        font-size: 1.2rem;
+        font-weight: 500;
+        margin-bottom: 0px;
+        color: #e1058c;
+      }
+
+      pre {
+        margin-top: 4px !important;
+        font-size: 0.8rem;
+        font-weight: 300;
+        color: #f8f8f8 !important;
+      }
+    }
+  }
+
+  @media (max-width: 767.98px) {
+    padding: 0px;
   }
 `;

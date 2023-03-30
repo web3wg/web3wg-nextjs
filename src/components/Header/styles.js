@@ -17,7 +17,26 @@ export default styled.header`
     }
 
     a {
+      font-family: "Montserrat", sans-serif;
       text-transform: capitalize;
+      transition: 0.4s;
+      font-weight: 700;
+      cursor: pointer;
+
+      &.current-page {
+        color: #e1058c;
+      }
+
+      &:hover {
+        filter: brightness(1.2);
+        color: #e1058c !important;
+      }
+    }
+
+    .main-logo {
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
 
     .logo-container {
@@ -25,6 +44,16 @@ export default styled.header`
       height: 80px;
       width: 80px;
       z-index: 15;
+    }
+  }
+
+  @media (min-width: 992px) {
+    nav {
+      .main-logo {
+        display: flex;
+        justify-content: flex-end;
+        align-items: flex-end;
+      }
     }
   }
 `;

@@ -1,6 +1,7 @@
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import PageLayout from "@components/PageLayout";
+import SectionHeader from "@components/SectionHeader";
 import Container from "@styles/pages/contact";
 
 export default function Contact() {
@@ -52,7 +53,7 @@ export default function Contact() {
               onSubmit={handleSubmit(onSubmitHandler)}
             >
               <div className="container">
-                <h2>Contact Us</h2>
+                <SectionHeader text={"Contact Us"} />
                 <div className="row">
                   <div className="col-lg-6 mb-2 mt-2 col-sm-12 text-left">
                     <label htmlFor="name">Name</label>

@@ -1,6 +1,7 @@
 import Footer from "@components/Footer";
 import Header from "@components/Header";
 import Head from "next/head";
+import MainContainer from "./styles";
 
 export default function PageLayout({
   title = "Web3 Working Group",
@@ -8,6 +9,7 @@ export default function PageLayout({
   stickyHeader = false,
   transparentHeader = false,
   staticBottom = false,
+  gradientCenter = false,
   children
 }) {
   return (
@@ -23,7 +25,7 @@ export default function PageLayout({
         stickyHeader={stickyHeader}
         transparentHeader={transparentHeader}
       />
-      <main>{children}</main>
+      <MainContainer gradientCenter={gradientCenter}>{children}</MainContainer>
       <Footer staticBottom={staticBottom} />
     </>
   );

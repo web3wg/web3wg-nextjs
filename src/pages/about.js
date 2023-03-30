@@ -1,10 +1,12 @@
-import PageLayout from "@components/PageLayout";
-import Container from "@styles/pages/about";
-import Image from "next/image";
 import Link from "next/link";
+import Image from "next/image";
+import classNames from "classnames";
+import PageLayout from "@components/PageLayout";
+import SectionHeader from "@components/SectionHeader";
+import Container, { MemberContainer } from "@styles/pages/about";
 
 export async function getStaticProps() {
-  const REVALIDATE_TIME = 300;
+    const REVALIDATE_TIME = parseInt(process.env.REVALIDATE_TIME) || 300;
 
   try {
     const res = await fetch(
@@ -22,8 +24,8 @@ export async function getStaticProps() {
 
     return {
       props: {
-        teamMembers,
-        boardMembers,
+        teamMembers: teamMembers || [],
+        boardMembers: boardMembers || [],
       },
       revalidate: REVALIDATE_TIME,
     };
@@ -43,7 +45,8 @@ export default function About({ teamMembers = [], boardMembers = [] }) {
           <div className="container">
             <div className="row">
               <div className="col-12">
-                <h1 className="text-left">WHAT WE DO</h1>
+                <h1 className="text-left"></h1>
+                <SectionHeader text={"What we do"} />
                 <div className="embed-responsive embed-responsive-16by9">
                   <iframe
                     className="embed-responsive-item"
@@ -56,11 +59,11 @@ export default function About({ teamMembers = [], boardMembers = [] }) {
                   <p className="text-center">
                     Web3 Working Group is a 501(c)(3) nonprofit organization.
                     Our purpose is to educate about web3 infrastructure and how
-                    it&apos;s distinct but adjacent to the cryptocurrency industry.
-                    We educate regulators and the public at-large about how web3
-                    will permanently restore user control of cyberspace,
-                    replacing centralized control with transparent and
-                    permissionless protocols through incentives aligned with
+                    it&apos;s distinct but adjacent to the cryptocurrency
+                    industry. We educate regulators and the public at-large
+                    about how web3 will permanently restore user control of
+                    cyberspace, replacing centralized control with transparent
+                    and permissionless protocols through incentives aligned with
                     users.
                   </p>
                 </div>
@@ -68,7 +71,6 @@ export default function About({ teamMembers = [], boardMembers = [] }) {
             </div>
           </div>
         </section>
-        <hr />
         <section>
           <div className="container">
             <div className="row">
@@ -90,9 +92,7 @@ export default function About({ teamMembers = [], boardMembers = [] }) {
                         style={{ textAlign: "center !important" }}
                         id="mc_embed_signup_scroll"
                       >
-                        <h2 style={{ fontSize: "1em", marginBottom: "0px" }}>
-                          Newsletter
-                        </h2>
+                        <SectionHeader text={"Newsletter"} />
                         <div
                           style={{ color: "white", marginRight: "0px" }}
                           className="indicates-required"
@@ -187,8 +187,8 @@ export default function About({ teamMembers = [], boardMembers = [] }) {
                                 href="https://mailchimp.com/legal/terms"
                                 target="_blank"
                               >
-                                Learn more about Mailchimp&apos;s privacy practices
-                                here.
+                                Learn more about Mailchimp&apos;s privacy
+                                practices here.
                               </a>
                             </p>
                           </div>
@@ -219,11 +219,6 @@ export default function About({ teamMembers = [], boardMembers = [] }) {
                           <button
                             type="submit"
                             id="mc-embedded-subscribe"
-                            className="button"
-                            style={{
-                              backgroundColor: "#FCEE21",
-                              color: "black",
-                            }}
                           >
                             Subscribe
                           </button>
@@ -236,19 +231,18 @@ export default function About({ teamMembers = [], boardMembers = [] }) {
             </div>
           </div>
         </section>
-        <hr />
         <section>
           <div className="container" style={{ paddingBottom: "100px" }}>
             {!!teamMembers.length && (
               <>
-                <div className="row">
-                  <div className="col-lg-12 mb-4 mt-2 text-center">
-                    <h2>Team</h2>
-                  </div>
-                </div>
+                <SectionHeader text={"Team"} />
                 <div className="row">
                   {teamMembers.map((member) => (
-                    <Member key={member.id} {...member.attributes} />
+                    <Member
+                      key={member.id}
+                      {...member.attributes}
+                      type={"TEAM"}
+                    />
                   ))}
                 </div>
               </>
@@ -256,14 +250,14 @@ export default function About({ teamMembers = [], boardMembers = [] }) {
 
             {!!boardMembers.length && (
               <>
-                <div className="row">
-                  <div className="col-sm-12 mt-4 mb-2 text-center">
-                    <h2>Board</h2>
-                  </div>
-                </div>
+                <SectionHeader text={"Board"} />
                 <div className="row">
                   {boardMembers.map((member) => (
-                    <Member key={member.id} {...member.attributes} />
+                    <Member
+                      key={member.id}
+                      {...member.attributes}
+                      type={"BOARD"}
+                    />
                   ))}
                 </div>
               </>
@@ -275,27 +269,49 @@ export default function About({ teamMembers = [], boardMembers = [] }) {
   );
 }
 
-function Member({ profilePicture, socialLink, fullName, description }) {
+function Member({
+  profilePicture,
+  socialLink,
+  fullName,
+  position,
+  description,
+  type,
+}) {
   return (
-    <div className="col-lg-6 col-md-6 col-sm-12 text-center member-container">
-      <Image
-        className="rounded-circle"
-        alt="140x140"
-        width={140}
-        height={140}
-        src={
-          process.env.NEXT_PUBLIC_CMS_URL + profilePicture.data.attributes.url
-        }
-        data-holder-rendered="true"
-      />
-      <h3>
-        {socialLink ? (
-          <Link href={socialLink}>{fullName}</Link>
-        ) : (
-          <>{fullName}</>
-        )}
-      </h3>
-      <pre>{description}</pre>
-    </div>
+    <MemberContainer className="col-lg-6 col-md-12 col-sm-12">
+      <div
+        className={classNames("member-inner-container", {
+          "alternate-color": type === "BOARD",
+        })}
+      >
+        <div className="inner-container">
+          <div className="image-container">
+            <Image
+              alt="Member picture"
+              width={82}
+              height={82}
+              src={
+                process.env.NEXT_PUBLIC_CMS_URL +
+                profilePicture.data.attributes.url
+              }
+              data-holder-rendered="true"
+            />
+          </div>
+        </div>
+        <div className="inner-container">
+          <h3>
+            {socialLink ? (
+              <Link href={socialLink} rel="noopener noreferrer" target="_blank">
+                {fullName}
+              </Link>
+            ) : (
+              <>{fullName}</>
+            )}
+          </h3>
+          {position && <h4 className="position">{position}</h4>}
+          {description && <pre>{description}</pre>}
+        </div>
+      </div>
+    </MemberContainer>
   );
 }
