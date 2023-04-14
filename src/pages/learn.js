@@ -137,7 +137,7 @@ function LearnVideo({
   return (
     <VideoContainer className="col-lg-4 mb-4 mt-2 col-sm-12">
       <div className="embed-responsive embed-responsive-16by9">
-        {web3Link ? (
+        {web3Link && selectedNetwork === "WEB3" ? (
           <div className="embed-responsive-item">
             <Player
               title={title}
