@@ -1,11 +1,17 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import PageLayout from "@components/PageLayout";
 import CustomGlobalStyle from "@styles/pages/home";
 import enterView from "@utils/sticky";
 import Link from "next/link";
 
 export default function Home() {
+  const canvasRef = useRef(null);
+
   useEffect(() => {
+    if (typeof window === "undefined") {
+      return false;
+    }
+
     enterView({
       selector: "section",
       enter: function (el) {
@@ -14,7 +20,7 @@ export default function Home() {
     });
 
     const html = document.documentElement;
-    const canvas = document.getElementById("hero-lightpass");
+    const canvas = canvasRef.current;
     const context = canvas.getContext("2d");
 
     const bganimdir = "/images/scrollytelling_v34_comp";
@@ -381,11 +387,11 @@ export default function Home() {
         staticBottom
       >
         <>
-          <canvas id="hero-lightpass">Not supported in your browser</canvas>
+          <canvas ref={canvasRef}>Not supported in your browser</canvas>
 
           <section className="scrollytellingcontainer">
             <div className="scrollytellingcontent">
-              <h1 style={{ marginBottom: "100%" }}>
+              <h1 style={{ marginBottom: "70%" }}>
                 <span className="span-block">An era-defining</span>
                 <br />
                 <span className="custom-gradient">technological</span>
