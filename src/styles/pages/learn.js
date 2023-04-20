@@ -59,6 +59,11 @@ export default styled.div`
       & div {
         border-radius: 12px;
       }
+
+      & video, & iframe {
+        border-radius: 12px;
+        padding: 16px;
+      }
     }
   }
 

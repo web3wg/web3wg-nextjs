@@ -1,17 +1,20 @@
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import Toggle from "react-toggle";
-import PageLayout from "@components/PageLayout";
-import SectionHeader from "@components/SectionHeader";
-import Container, {
-  VideoContainer,
-  MediumArticleContainer,
-} from "@styles/pages/learn";
 import {
   LivepeerConfig,
   createReactClient,
   studioProvider,
   Player,
 } from "@livepeer/react";
+import { video_info } from "play-dl";
+import ReactPlayer from "react-player/lazy";
+import YoutubeReactPlayer from "react-player/youtube";
+import PageLayout from "@components/PageLayout";
+import SectionHeader from "@components/SectionHeader";
+import Container, {
+  VideoContainer,
+  MediumArticleContainer,
+} from "@styles/pages/learn";
 
 const livepeerClient = createReactClient({
   provider: studioProvider({
@@ -23,6 +26,36 @@ export async function getStaticProps() {
   const REVALIDATE_TIME = parseInt(process.env.REVALIDATE_TIME) || 300;
 
   try {
+    function extractYouTubeVideoId(embedUrl = "") {
+      const urlPattern =
+        /^https?:\/\/(?:www\.)?youtube\.com\/embed\/([a-zA-Z0-9_-]{11})(?:\?.*)?$/;
+      const match = embedUrl.match(urlPattern);
+
+      if (match && match[1]) {
+        return match[1];
+      } else {
+        return null;
+      }
+    }
+
+    async function getVideoInfo(id = "") {
+      const youTubeID = id;
+
+      const info = await video_info(
+        "https://www.youtube.com/watch?v=" + youTubeID
+      );
+
+      const thumbnail = info.video_details.thumbnails.sort(
+        (a, b) => b.width - a.width
+      )[0];
+
+      const thumbnailUrl = thumbnail.url;
+
+      const videoUrl = "https://www.youtube.com/watch?v=" + youTubeID; //format.url;
+
+      return { thumbnailUrl, videoUrl };
+    }
+
     const resLearnVideos = await fetch(
       process.env.NEXT_PUBLIC_CMS_URL +
         "/api/learn-videos?sort=displayOrder:asc"
@@ -31,8 +64,24 @@ export async function getStaticProps() {
       "https://api.rss2json.com/v1/api.json?rss_url=https://medium.com/feed/@web3wg"
     );
 
-    const { data: learnVideos } = await resLearnVideos.json();
+    let { data: learnVideos } = await resLearnVideos.json();
     const { items: mediumArticles } = await resMediumArticles.json();
+
+    for (let index = 0; index < learnVideos.length; index++) {
+      const youtubeId = extractYouTubeVideoId(
+        learnVideos[index]?.attributes?.web2Link
+      );
+      const { thumbnailUrl, videoUrl } = await getVideoInfo(youtubeId);
+
+      learnVideos[index] = {
+        ...learnVideos[index],
+        attributes: {
+          ...learnVideos[index].attributes,
+          thumbnailUrl,
+          web2Link: videoUrl,
+        },
+      };
+    }
 
     return {
       props: {
@@ -81,10 +130,7 @@ export default function Learn({ learnVideos = [], mediumArticles = [] }) {
                   <div className="network-toggle">
                     <div className="toggle-container">
                       <span>Youtube</span>
-                      <Toggle
-                        icons={false}
-                        onChange={handleToggleChange}
-                      />
+                      <Toggle icons={false} onChange={handleToggleChange} />
                       <span>Arweave</span>
                     </div>
                     <h1>Select the source of the videos</h1>
@@ -129,6 +175,7 @@ function LearnVideo({
   selectedNetwork,
   title,
   shortDescription,
+  thumbnailUrl,
 }) {
   const url = selectedNetwork === "WEB2" ? web2Link : web3Link;
 
@@ -139,20 +186,26 @@ function LearnVideo({
       <div className="embed-responsive embed-responsive-16by9">
         {web3Link && selectedNetwork === "WEB3" ? (
           <div className="embed-responsive-item">
-            <Player
-              title={title}
-              src={web3Link}
-              autoPlay={false}
-              muted
-              showTitle
-              autoUrlUpload={{
-                fallback: true,
-                ipfsGateway: "https://w3s.link",
-              }}
+            <ReactPlayer
+              controls
+              url={web3Link}
+              light={thumbnailUrl}
+              height={"100%"}
+              width={"100%"}
+              playing
             />
           </div>
         ) : (
-          <iframe className="embed-responsive-item" src={web2Link}></iframe>
+          <div className="embed-responsive-item">
+            <YoutubeReactPlayer
+              controls
+              url={web2Link}
+              light={thumbnailUrl}
+              height={"100%"}
+              width={"100%"}
+              playing
+            />
+          </div>
         )}
       </div>
       <h3 className="video-title text-truncate" title={title}>
