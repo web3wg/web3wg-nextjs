@@ -173,6 +173,24 @@ export default function Home() {
       for (let i = 1; i < frameCount; i++) {
         const img = new Image();
         img.src = currentFrame(i);
+        img.onload = () => {
+          loadedImages[i] = img;
+        };
+      }
+    };
+
+    const loadedImages = {};
+
+    const updateImage = (index) => {
+      if (loadedImages[index]) {
+        context.drawImage(loadedImages[index], 0, 0);
+      } else {
+        const img = new Image();
+        img.src = currentFrame(index);
+        img.onload = function () {
+          loadedImages[index] = img;
+          context.drawImage(img, 0, 0);
+        };
       }
     };
 
@@ -236,11 +254,6 @@ export default function Home() {
     canvas.height = 2000;
 
     img.onload = function () {
-      context.drawImage(img, 0, 0);
-    };
-
-    const updateImage = (index) => {
-      img.src = currentFrame(index);
       context.drawImage(img, 0, 0);
     };
 
