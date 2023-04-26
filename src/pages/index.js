@@ -24,23 +24,24 @@ export default function Home() {
     const context = canvas.getContext("2d");
 
     const bganimdir = "/images/scrollytelling_v34_comp";
+    const bganimdirLoading = "/images/scrollytelling_v34_loading";
 
     var loading = new Array();
     loading = [
-      "/images/scrollytelling_v34_loading/000.webp",
-      "/images/scrollytelling_v34_loading/001.webp",
-      "/images/scrollytelling_v34_loading/002.webp",
-      "/images/scrollytelling_v34_loading/003.webp",
-      "/images/scrollytelling_v34_loading/004.webp",
-      "/images/scrollytelling_v34_loading/005.webp",
-      "/images/scrollytelling_v34_loading/006.webp",
-      "/images/scrollytelling_v34_loading/007.webp",
-      "/images/scrollytelling_v34_loading/008.webp",
-      "/images/scrollytelling_v34_loading/009.webp",
-      "/images/scrollytelling_v34_loading/010.webp",
-      "/images/scrollytelling_v34_loading/011.webp",
-      "/images/scrollytelling_v34_loading/012.webp",
-      "/images/scrollytelling_v34_loading/013.webp",
+      `${bganimdirLoading}/000.webp`,
+      `${bganimdirLoading}/001.webp`,
+      `${bganimdirLoading}/002.webp`,
+      `${bganimdirLoading}/003.webp`,
+      `${bganimdirLoading}/004.webp`,
+      `${bganimdirLoading}/005.webp`,
+      `${bganimdirLoading}/006.webp`,
+      `${bganimdirLoading}/007.webp`,
+      `${bganimdirLoading}/008.webp`,
+      `${bganimdirLoading}/009.webp`,
+      `${bganimdirLoading}/010.webp`,
+      `${bganimdirLoading}/011.webp`,
+      `${bganimdirLoading}/012.webp`,
+      `${bganimdirLoading}/013.webp`,
     ];
 
     var loop1 = new Array();
@@ -179,7 +180,18 @@ export default function Home() {
       }
     };
 
+    const preloadLoadingImages = () => {
+      for (let i = 0; i < loading.length; i++) {
+        const img = new Image();
+        img.src = loading[i];
+        img.onload = () => {
+          loadedLoadingImages[i] = img;
+        };
+      }
+    };
+
     const loadedImages = {};
+    const loadedLoadingImages = {};
 
     const updateImage = (index) => {
       if (loadedImages[index]) {
@@ -213,11 +225,16 @@ export default function Home() {
             x < runAnim.anim.length
           ) {
             const now = Date.now();
-            const img = new Image();
-            img.src = runAnim.anim[x];
-            img.onload = function () {
-              context.drawImage(img, 0, 0);
-            };
+            if (loadedLoadingImages[x]) {
+              context.drawImage(loadedLoadingImages[x], 0, 0);
+            } else {
+              const img = new Image();
+              img.src = runAnim.anim[x];
+              img.onload = function () {
+                loadedLoadingImages[x] = img;
+                context.drawImage(img, 0, 0);
+              };
+            }
             x++;
           } else if (
             runAnim.run == true &&
@@ -248,6 +265,7 @@ export default function Home() {
         }, 100);
       }).then(() => {});
     }
+
     const img = new Image();
     img.src = currentFrame(1);
     canvas.width = 2000;
@@ -385,6 +403,7 @@ export default function Home() {
 
     window.addEventListener("scroll", handleEventListener);
 
+    preloadLoadingImages();
     preloadImages();
 
     return () => window.removeEventListener("scroll", handleEventListener);
