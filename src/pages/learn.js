@@ -6,11 +6,12 @@ import {
   studioProvider,
   Player,
 } from "@livepeer/react";
+import axios from "axios";
 import { video_info } from "play-dl";
-import ReactPlayer from "react-player/lazy";
 import YoutubeReactPlayer from "react-player/youtube";
 import PageLayout from "@components/PageLayout";
 import SectionHeader from "@components/SectionHeader";
+import isEmpty from "@utils/isEmpty";
 import Container, {
   VideoContainer,
   MediumArticleContainer,
@@ -38,6 +39,17 @@ export async function getStaticProps() {
       }
     }
 
+    function getArweaveIdFromUrl(url) {
+      const arweavePattern = /arweave\.net\/([a-zA-Z0-9-_]+)/;
+      const match = url.match(arweavePattern);
+
+      if (match && match[1]) {
+        return match[1];
+      }
+
+      return null;
+    }
+
     async function getVideoInfo(id = "") {
       const youTubeID = id;
 
@@ -45,15 +57,46 @@ export async function getStaticProps() {
         "https://www.youtube.com/watch?v=" + youTubeID
       );
 
-      const thumbnail = info.video_details.thumbnails.sort(
-        (a, b) => b.width - a.width
-      )[0];
+      const { thumbnails, title, description } = info.video_details;
+
+      const thumbnail = thumbnails.sort((a, b) => b.width - a.width)[0];
 
       const thumbnailUrl = thumbnail.url;
 
-      const videoUrl = "https://www.youtube.com/watch?v=" + youTubeID; //format.url;
+      const videoUrl = "https://www.youtube.com/watch?v=" + youTubeID;
 
-      return { thumbnailUrl, videoUrl };
+      return { thumbnail: thumbnailUrl, video: videoUrl, title, description };
+    }
+
+    async function getBundlrInfo(txid = "") {
+      const { data } = await axios.get(
+        "https://node1.bundlr.network/tx/" + txid
+      );
+
+      const { tags } = data;
+
+      const { value: title } = tags.filter(
+        (tag) => tag.name === "Video-Title"
+      )[0];
+      const { value: description } = tags.filter(
+        (tag) => tag.name === "Video-Description"
+      )[0];
+      const { value: video } = tags.filter(
+        (tag) => tag.name === "Video-Filename"
+      )[0];
+      const { value: thumbnail } = tags.filter(
+        (tag) => tag.name === "Video-Thumbnail"
+      )[0];
+
+      const { data: metadata } = await axios.get(
+        "https://node1.bundlr.network/tx/" + txid + "/data"
+      );
+
+      const { paths } = metadata;
+
+      const videoTxid = paths[video].id;
+
+      return { title, description, video, thumbnail, videoTxid };
     }
 
     const resLearnVideos = await fetch(
@@ -71,15 +114,57 @@ export async function getStaticProps() {
       const youtubeId = extractYouTubeVideoId(
         learnVideos[index]?.attributes?.web2Link
       );
-      const { thumbnailUrl, videoUrl } = await getVideoInfo(youtubeId);
+
+      let web2Data = {};
+      let web3Data = {};
+
+      if (youtubeId) {
+        const {
+          title: titleWeb2,
+          description: descriptionWeb2,
+          video: videoWeb2,
+          thumbnail: thumbnailWeb2,
+        } = await getVideoInfo(youtubeId);
+
+        web2Data = {
+          id: youtubeId,
+          title: titleWeb2,
+          description: descriptionWeb2,
+          video: videoWeb2,
+          thumbnail: thumbnailWeb2,
+        };
+      }
+
+      if (learnVideos[index]?.attributes?.web3Link) {
+        const arUrl = getArweaveIdFromUrl(
+          learnVideos[index]?.attributes?.web3Link
+        );
+
+        const {
+          title: titleWeb3,
+          description: descriptionWeb3,
+          video: videoWeb3,
+          thumbnail: thumbnailWeb3,
+          videoTxid,
+        } = await getBundlrInfo(arUrl);
+
+        web3Data = {
+          id: arUrl,
+          title: titleWeb3,
+          description: descriptionWeb3,
+          video: videoWeb3,
+          thumbnail: thumbnailWeb3,
+          videoTxid,
+        };
+      }
 
       learnVideos[index] = {
         ...learnVideos[index],
         attributes: {
           ...learnVideos[index].attributes,
-          thumbnailUrl,
-          web2Link: videoUrl,
         },
+        web2Data,
+        web3Data,
       };
     }
 
@@ -142,7 +227,7 @@ export default function Learn({ learnVideos = [], mediumArticles = [] }) {
                       <LearnVideo
                         key={learnVideo.id}
                         selectedNetwork={selectedNetwork}
-                        {...learnVideo.attributes}
+                        {...learnVideo}
                       />
                     ))}
                   </LivepeerConfig>
@@ -169,38 +254,44 @@ export default function Learn({ learnVideos = [], mediumArticles = [] }) {
   );
 }
 
-function LearnVideo({
-  web2Link,
-  web3Link,
-  selectedNetwork,
-  title,
-  shortDescription,
-  thumbnailUrl,
-}) {
-  const url = selectedNetwork === "WEB2" ? web2Link : web3Link;
+function LearnVideo({ web2Data = {}, web3Data = {}, selectedNetwork }) {
+  if (isEmpty(web2Data) && isEmpty(web3Data)) return false;
 
-  if (!url) return false;
+  function getVideoTitle() {
+    return selectedNetwork === "WEB3" ? web3Data.title : web2Data.title;
+  }
+
+  function getVideoDescription() {
+    return selectedNetwork === "WEB3"
+      ? web3Data.description
+      : web2Data.description;
+  }
 
   return (
     <VideoContainer className="col-lg-4 mb-4 mt-2 col-sm-12">
       <div className="embed-responsive embed-responsive-16by9">
-        {web3Link && selectedNetwork === "WEB3" ? (
+        {!isEmpty(web3Data) && selectedNetwork === "WEB3" ? (
           <div className="embed-responsive-item">
-            <ReactPlayer
-              controls
-              url={web3Link}
-              light={thumbnailUrl}
-              height={"100%"}
-              width={"100%"}
-              playing
+            <Player
+              title="Waterfalls"
+              src={`ar://${web3Data.videoTxid}`}
+              showTitle={false}
+              poster={`https://arweave.net/${web3Data.id}/${web3Data.thumbnail}`}
+              muted
+              autoPlay={false}
+              controls={false}
+              autoUrlUpload={{
+                fallback: true,
+                ipfsGateway: "https://w3s.link",
+              }}
             />
           </div>
         ) : (
           <div className="embed-responsive-item">
             <YoutubeReactPlayer
               controls
-              url={web2Link}
-              light={thumbnailUrl}
+              url={web2Data.video}
+              light={web2Data.thumbnail}
               height={"100%"}
               width={"100%"}
               playing
@@ -208,10 +299,10 @@ function LearnVideo({
           </div>
         )}
       </div>
-      <h3 className="video-title text-truncate" title={title}>
-        {title}
+      <h3 className="video-title text-truncate" title={getVideoTitle()}>
+        {getVideoTitle()}
       </h3>
-      <p className="video-description">{shortDescription}</p>
+      <p className="video-description">{getVideoDescription()}</p>
     </VideoContainer>
   );
 }
